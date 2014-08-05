@@ -1,3 +1,4 @@
+<%@ page import="tournament.manager.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,17 @@ p {
 </head>
 <body>
 
+	<g:if test="${flash.message}">
+    	<div class="message">${flash.message}</div>
+  	</g:if>
+  	<g:hasErrors bean="${userInstance}">
+			<ul class="errors" role="alert">
+				<g:eachError bean="${userInstance}" var="error">
+				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+				</g:eachError>
+			</ul>
+	</g:hasErrors>
+  
 	<g:form action="save">
 		<fieldset class="form">
 			<div
@@ -95,7 +107,7 @@ p {
 			<div
 				class="fieldcontain ${hasErrors(bean: userInstance, field: 'firstName', 'error')} required">
 				<label for="firstName"> <g:message
-						code="user.firstName.label" default="firstName" />
+						code="user.firstName.label" default="First Name" />
 
 				</label>
 				<g:textField name="firstName" value="${userInstance?.firstName}" />
@@ -103,7 +115,7 @@ p {
 			<div
 				class="fieldcontain ${hasErrors(bean: userInstance, field: 'lastName', 'error')} required">
 				<label for="lastName"> <g:message code="user.lastName.label"
-						default="lastName" />
+						default="Last Name" />
 
 				</label>
 				<g:textField name="lastName" value="${userInstance?.lastName}" />
@@ -114,7 +126,7 @@ p {
 						default="Password" />
 
 				</label>
-				<g:textField name="password" value="${userInstance?.password}" />
+				<g:passwordField name="password" value="${userInstance?.password}" />
 			</div>
 			<div
 				class="fieldcontain ${hasErrors(bean: userInstance, field: 'confirmPassword', 'error')} required">
@@ -122,7 +134,7 @@ p {
 						default="Confirm password" />
 
 				</label>
-				<g:textField name="confirmPassword" value="${userInstance?.confirmPassword}" />
+				<g:passwordField name="confirmPassword" value="${userInstance?.confirmPassword}" />
 			</div>
 		</fieldset>
 		<fieldset class="buttons">

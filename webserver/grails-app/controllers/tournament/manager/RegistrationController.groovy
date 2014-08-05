@@ -2,41 +2,47 @@ package tournament.manager
 
 class RegistrationController {
 
-    def index() { 
+	def index() {
 		[model: new User()]
 	}
-	
-	def save(RegistrationCommand cmd) {
-		if (cmd.hasErrors()) {
-			redirect (action:"index", model:cmd)
+
+	def save() {
+		def existUser = User.findByEmail(params.email)
+		if (existUser) {
+			flash.message = "Saving error"
+			redirect (action:"index")
+		} else {
+			User user = new User()
+			user.email = params.email
+			user.password = params.password
+			user.firstName = params.firstName
+			user.lastName = params.lastName
+			user.status = "pending_confirmation"
+			user.verificationCode = UUID.randomUUID().toString()
+			if (!user.save(flush:true)){
+				flash.message = "Saving error"
+				render (view:"index", model:[userInstance:user])
+			} else {
+				session.user = user
+				redirect (view:"congrats")
+			}
 		}
-		User user = new User()
-		user.email = cmd.email
-		user.password = cmd.password
-		user.firstName = cmd.firstName
-		user.lastName = cmd.lastName
-		user.status = "pending_confirmation"
-		user.verificationCode = UUID.randomUUID().toString()
-		if (!user.save(flush:true)){
-			redirect (action:"index", model:cmd)
-		}
-		redirect (view:"congrats")
 	}
-	
+
 	def congrats () {
-		
+
 	}
 }
 
 class RegistrationCommand {
-	
+
 	String email
 	String firstName
 	String lastName
 	String password
 	String confirmPassword
-	
-	
+
+
 	static constraints = {
 		email(nullable:false, blank:false, size: 5..30)
 		firstName(nullable:false, blank:false, size: 2..30)

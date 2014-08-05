@@ -81,35 +81,7 @@ p {
 </head>
 <body>
 
-	<g:form action="save">
-		<fieldset class="form">
-		<div
-			class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} ">
-			<label for="email"> <g:message code="user.email.label"
-					default="Email" />
-
-			</label>
-			<g:textField name="email" value="${userInstance?.email}" />
-		</div>
-
-		<div
-			class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} ">
-			<label for="psw"> <g:message code="user.psw.label"
-					default="Psw" />
-
-			</label>
-			<g:textField name="psw" value="${userInstance?.psw}" />
-		</div>
-		<div
-			class="fieldcontain ${hasErrors(bean: userInstance, field: 'psw', 'error')} ">
-			<label for="psw"> <g:message code="user.psw.label"
-					default="Psw" />
-
-			</label>
-			<g:textField name="psw" value="${userInstance?.psw}" />
-		</div>
-		</fieldset>
-	</g:form>
+	<h1>Congratulation!</h1>
 
 
 </body>
