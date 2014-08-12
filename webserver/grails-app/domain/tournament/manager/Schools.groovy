@@ -1,5 +1,7 @@
 package tournament.manager
 
+import tournament.manager.auth.User;
+
 class Schools {
 
 	String name

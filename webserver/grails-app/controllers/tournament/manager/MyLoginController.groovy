@@ -1,6 +1,6 @@
 package tournament.manager
 
-class LoginController extends AbstractController {
+class MyLoginController extends AbstractController {
 
 	UserService userService
 	

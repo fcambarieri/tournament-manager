@@ -2,6 +2,8 @@ package tournament.manager
 
 abstract class AbstractController {
 
+	def springSecurityService
+	
     def sanitizeParams() { 
 		def sanitizedParams = [:]
 		params.each { k , v ->
@@ -12,10 +14,7 @@ abstract class AbstractController {
 	}
 	
 	def getCurrentUser() {
-		return session.user
+		return springSecurityService.currentUser
 	}
-	
-	def isUserLogin() {
-		return getCurrentUser() != null
-	}
+
 }

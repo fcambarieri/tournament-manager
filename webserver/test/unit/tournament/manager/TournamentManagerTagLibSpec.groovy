@@ -4,10 +4,10 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.web.GroovyPageUnitTestMixin} for usage instructions
  */
-@TestFor(MyLoginController)
-class LoginControllerSpec extends Specification {
+@TestFor(TournamentManagerTagLib)
+class TournamentManagerTagLibSpec extends Specification {
 
     def setup() {
     }

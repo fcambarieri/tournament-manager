@@ -10,7 +10,6 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -61,7 +60,21 @@ grails {
         // escapes all not-encoded output at final stage of outputting
         // filteringCodecForContentType.'text/html' = 'html'
     }
+	mail {
+		host = "smtp.gmail.com"
+		port = 465
+		username = "fcambarieri@gmail.com"
+		password = "AndreaBeatriz"
+		props = ["mail.smtp.auth": "true",
+				"mail.smtp.socketFactory.port": "465",
+				"mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+				"mail.smtp.socketFactory.fallback": "false"]
+	}
 }
+
+
+
+grails.mail.default.from="noreply@tournament-manager.com"
 
 
 grails.converters.encoding = "UTF-8"
@@ -118,4 +131,33 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+	debug  'tournament.manager'
+	
+	root {
+		debug 'stdout'
+	}
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'tournament.manager.auth.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tournament.manager.auth.UserRole'
+grails.plugin.springsecurity.authority.className = 'tournament.manager.auth.Role'
+//grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+//grails.plugin.springsecurity.rejectIfNoRule = false
+//grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/registration/*':                ['permitAll'],
+	'/tournament/*':                ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+

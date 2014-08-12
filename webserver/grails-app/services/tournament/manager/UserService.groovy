@@ -2,6 +2,7 @@ package tournament.manager
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import tournament.manager.auth.User
 
 import grails.transaction.Transactional
 
@@ -28,5 +29,20 @@ class UserService {
 //		cipher.init(Cipher.ENCRYPT_MODE, KS);
 //		byte[] encrypted = cipher.doFinal(psw.getBytes());
 ////		return new String(encrypted)
+	}
+	
+	def createUser(params) {
+		User user = new User()
+		user.username = params.username
+		user.email = params.email
+		user.password = params.password
+		user.confirmPassword = params.confirmPassword
+		user.firstName = params.firstName
+		user.lastName = params.lastName
+		user.status = "pending_confirmation"
+		user.verificationCode = UUID.randomUUID().toString()
+		if (!user.save(flush:true)){
+			log.error "saving user ${user.email}", user.errors
+		}
 	}
 }
