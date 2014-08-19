@@ -5,7 +5,7 @@ import tournament.manager.auth.User;
 class Tournament {
 
 	String name
-	String status //inscription_open, inscription_close, open
+	TournamentStatus status //inscription_open, inscription_close, open
 	Date dateCreated
 	Date lastUpdated
 	
@@ -15,4 +15,8 @@ class Tournament {
     }
 	
 	static belongsTo = [owner: User]
+	
+	public String toString() {
+		return "$name [$status]"
+	}
 }

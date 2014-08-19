@@ -10,6 +10,8 @@ class Students {
 	String picture
 	
     static constraints = {
+		name(blank:false, size:2..30)
+		lastName(blank:false, size:2..30)
 		docNumber(nullable:true)
 		picture(nullable:true)
     }

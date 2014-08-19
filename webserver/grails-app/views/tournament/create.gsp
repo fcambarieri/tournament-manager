@@ -13,6 +13,10 @@
 	<div class="wrapper style1">
 		<article id="tournament" class="container small">
 			<header>
+				<div id="errorContainer" class="errors" role="alert">
+					<p>&nbsp;Please correct the following errors and try again:</p>
+					<ul />
+				</div>
 				<g:if test="${flash.message}">
 					<div class="message">
 						${flash.message}
@@ -31,14 +35,14 @@
 			<div>
 				<div class="row">
 					<div class="12u">
-						<g:form name="tournament"
+						<g:form name="tournament" id="tournament"
 							url="[controller:'tournament',action:'save']">
 							<g:render template="/tournament/form" />
 							<div class="row double">
 								<div class="12u">
 									<ul class="actions">
 										<li><g:submitButton name="continue" class="save"
-												value="${message(code: 'default.button.continue.label', default: 'Continue')}" /></li>
+												value="${message(code: 'default.button.save.label', default: 'Save')}" /></li>
 										<li><g:link controller="tournament" action="index">
 												${message(code: 'default.button.cancel.label', default: 'Cancel')}
 											</g:link></li>
@@ -50,10 +54,29 @@
 					</div>
 				</div>
 			</div>
-
+			<div id="formContainer"></div>
 		</article>
 	</div>
-
 	<g:render template="/home/templates/footer" />
+
+
+	<script type="text/javascript">
+	 $(function(){
+
+         $('#tournament').validate({
+             rules: {
+            	 name: "required"
+             },
+             messages: {
+                 name: "${message(code: 'error.name.label', default: 'Please enter a tournament name')}",
+             },
+             errorContainer: $('#errorContainer'),
+             errorLabelContainer: $('#errorContainer ul'),
+             wrapper: 'li'
+         });
+
+     });
+     
+	</script>
 </body>
 </html>

@@ -1,9 +1,32 @@
 <%@ page import="tournament.manager.auth.User"%>
 
 
+<style type="text/css">
+#errorContainer {
+	display: none;
+	overflow: auto;
+	background-color: #FFDDDD;
+	border: 1px solid #FF2323;
+	padding-top: 1;
+}
+
+#errorContainer label {
+	float: none;
+	width: auto;
+}
+
+input.error {
+	border: 1px solid #FF2323;
+}
+</style>
+
 <div class="wrapper style2">
 	<article id="registration" class="container small">
 		<header>
+			<div id="errorContainer" class="errors" role="alert">
+				<p>&nbsp;Please correct the following errors and try again:</p>
+				<ul />
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message">
 					${flash.message}
@@ -22,7 +45,7 @@
 		<div>
 			<div class="row">
 				<div class="12u">
-					<g:form name="reg" url="[controller:'registration',action:'save']">
+					<g:form id="reg" name="reg" url="[controller:'registration',action:'save']">
 						<fieldset class="form">
 							<div>
 								<div class="row">

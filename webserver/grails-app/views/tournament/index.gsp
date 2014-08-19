@@ -6,22 +6,21 @@
 <title>Tournament Manager</title>
 </head>
 <body>
-
 	<g:render template="/home/templates/nav" />
-
 	<!-- Work -->
 	<div class="wrapper style1">
 		<article id="tournaments">
-			<div id="list-tournament" class="content scaffold-list" role="main">
+			<div id="list-tournament" class="ch-box-lite" role="main">
 				<h1>
 					<g:message code="default.tournament.label" default="Tournaments" />
 				</h1>
+
 				<g:if test="${flash.message}">
 					<div class="message" role="status">
 						${flash.message}
 					</div>
 				</g:if>
-				<table>
+				<table class="ch-datagrid">
 					<thead>
 						<tr>
 
@@ -36,8 +35,9 @@
 
 							<g:sortableColumn property="status"
 								title="${message(code: 'tournament.status.label', default: 'Status')}" />
-								
-							<th><g:message code="default.button.actions.label" default="Actions" /></th>
+
+							<th scope="col"><g:message
+									code="default.button.actions.label" default="Actions" /></th>
 
 						</tr>
 					</thead>
@@ -60,23 +60,32 @@
 								</td>
 
 								<td>
-									<select>
-										<option value="volvo">Editar</option>
-										<option value="volvo">Eliminar</option>
-									</select>
+									<ul class="dropdown">
+										<li>
+										
+										<g:link controller="tournament" action="settings" params="[id:${tournamentInstance.id}]">
+												<i class="icon-cog"></i>
+												${message(code: 'default.link.create.label', default: 'Settings')}
+											</g:link></li>
+									</ul>
 								</td>
 							</tr>
 						</g:each>
 					</tbody>
 				</table>
 				<div class="pagination">
-					<g:paginate total="${total}" />
+					<g:paginate total="${total?:0}" />
 				</div>
 			</div>
 			<div class="row double">
 				<div class="12u">
 					<ul class="actions">
-						<g:link controller="tournament" action="create">${message(code: 'default.link.create.label', default: 'Create')}</g:link>
+						<form method="post" action="create">
+							<li><g:submitButton name="continue" class="create"
+									value="${message(code: 'default.link.create.label', default: 'Create')}" /></li>
+							<%--						 <g:link controller="tournament" action="create">${message(code: 'default.link.create.label', default: 'Create')}</g:link>--%>
+							</li>
+						</form>
 					</ul>
 
 				</div>
@@ -84,5 +93,8 @@
 		</article>
 	</div>
 	<g:render template="/home/templates/footer" />
+	<script type="text/javascript">
+
+	</script>
 </body>
 </html>

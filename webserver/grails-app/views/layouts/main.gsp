@@ -16,9 +16,8 @@
 <meta name="keywords"
 	content="tournament taekwondo manager bracket generator" />
 <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-<noscript>
 	<r:require modules="commonCss" />
-</noscript>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
 <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 </head>
@@ -32,21 +31,5 @@
 	<g:layoutBody />
 	<r:require modules="commonJs" />
 	<r:layoutResources />
-	<sec:ifLoggedIn>
-		<script>
-			$("#username").on("click", function() {
-				$("#menu").fadeToggle("fast");
-			});
-
-<%--			$('#username').hover(--%>
-<%--					  function () {--%>
-<%--					    $('menu', this).stop().slideDown(100);--%>
-<%--					  },--%>
-<%--					  function () {--%>
-<%--					    $('menu', this).stop().slideUp(100);--%>
-<%--					  }--%>
-<%--					);--%>
-		</script>
-	</sec:ifLoggedIn>
 </body>
 </html>
