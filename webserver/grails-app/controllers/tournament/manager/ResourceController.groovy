@@ -70,6 +70,21 @@ class ResourceController {
 		}
 	}
 	
+	def font = {
+		def name = params.name
+		def root = request.getSession().getServletContext().getRealPath("/")
+		def path = params.path?:"font"
+		
+		File f = new File("${root}/${path}/${name}")
+		
+		if (f.exists()) {
+			response.setContentType ("text/html")
+			render f.getText()
+		} else {
+			response.sendError (404, "Font [${name}] no encontrado en el path [${path}]")
+		}
+	}
+	
 	def img = {
 		def name = params.name
 		def extension = name.substring (name.lastIndexOf (".") + 1)

@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html class="bg-black">
 <head>
 <meta name="layout" content="main" />
 <title>Tournament Manager</title>
 </head>
-<body>
+<body class="bg-black">
 
-	<g:render template="/home/templates/nav" />
-
-	<!-- Work -->
-	<div class="wrapper style2">
-		<article id="work">
-			<header>
-				<h2>
-					${message(code: 'default.title.registration.label', default: 'Sign up')}
-				</h2>
-			</header>
-			<g:render template="/registration/form" />
-		</article>
-	</div>
-	<g:render template="/home/templates/footer" />
+	
+	<g:render template="/registration/form" />
+	
+<%--	<g:render template="/home/templates/footer" />--%>
+	
+<%--	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>--%>
+	
+	<g:render template="/home/templates/footer"/>
+	
 	<script type="text/javascript">
 
 	 $(function(){
@@ -29,9 +24,9 @@
                 firstName: "required",
                 lastName: "required",
                 email: {
-                    	email: true
-               	 	required: true
-                    }
+                    	email: true,
+               	 		required: true
+                    },
                 username: "required",
                 password: {
                     required: true,

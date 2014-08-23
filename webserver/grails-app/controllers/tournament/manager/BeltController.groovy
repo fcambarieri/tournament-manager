@@ -4,9 +4,11 @@ package tournament.manager
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.security.access.annotation.Secured
 
 @Transactional(readOnly = true)
-class BeltController {
+@Secured("hasRole('ROLE_USER')")
+class BeltController extends AbstractController{
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 

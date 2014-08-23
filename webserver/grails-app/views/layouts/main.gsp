@@ -16,20 +16,19 @@
 <meta name="keywords"
 	content="tournament taekwondo manager bracket generator" />
 <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-	<r:require modules="commonCss" />
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+	<r:require modules="adminLTECss" />
+<%--	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />--%>
 <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 </head>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <g:layoutHead />
-<g:javascript library="application" />
+
 <r:layoutResources />
 </head>
-<body>
+<body class="skin-blue">
 	<g:layoutBody />
-	<r:require modules="commonJs" />
 	<r:layoutResources />
 </body>
 </html>

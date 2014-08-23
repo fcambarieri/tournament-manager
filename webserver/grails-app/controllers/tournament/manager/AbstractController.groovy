@@ -1,5 +1,8 @@
 package tournament.manager
 
+import org.springframework.security.access.annotation.Secured
+
+@Secured("hasRole('ROLE_USER')")
 abstract class AbstractController {
 
 	def springSecurityService
@@ -16,5 +19,6 @@ abstract class AbstractController {
 	def getCurrentUser() {
 		return springSecurityService.currentUser
 	}
+
 
 }

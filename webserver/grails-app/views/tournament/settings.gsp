@@ -1,146 +1,98 @@
 <%@ page import="tournament.manager.Tournament"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="layout" content="main" />
-<title>Tournament Manager</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tournament Manager</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+		<meta name="layout" content="main"/>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="skin-blue">
+        <!-- header logo: style can be found in header.less -->
+        
+       	<g:render template="/home/templates/header"/>
+        
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+           
+			<g:render template="/home/templates/left"/>
+			
+			
+			
+			<!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                       
+                        <small>it all starts here</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">tournament</a></li>
+                        <li class="active">setting</li>
+                    </ol>
+                </section>
 
-	<g:render template="/home/templates/nav" />
+                <!-- Main content -->
+                <section class="content">
+ 						
+ 							<div class="box box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">Belts</h3>
+                                    <div class="box-tools pull-right">
+                                        <div class="label bg-aqua">Label</div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <g:render template="/belt/list"></g:render>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    
+                                </div><!-- /.box-footer-->
+                            </div>
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">Combat Categories</h3>
+                                    <div class="box-tools pull-right">
+                                        <div class="label bg-aqua">Label</div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <g:render template="/combatCategory/list"></g:render>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    
+                                </div><!-- /.box-footer-->
+                            </div>
+ 						     <div class="box box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">Poomse Categories</h3>
+                                    <div class="box-tools pull-right">
+                                        <div class="label bg-aqua">Label</div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <g:render template="/formCategory/list"></g:render>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    
+                                </div><!-- /.box-footer-->
+                            </div>
 
-<div id="default">
-            <ul>
-                <li><a href="#tab1">Belts</a></li>
-                <li><a href="#tab2">Forms</a></li>
-                <li><a href="#tab3">Combat</a></li>
-            </ul>
-            <div>
-                <div id="tab1">
-                    <g:render template="/belt/list" />
-                    <button id="btn-show" class="btn">Add</button>
-                </div>
-                <div id="tab2">
-                    <g:render template="/formCategory/list" />
-                </div>
-                <div id="tab3">
-                    <g:render template="/combatCategory/list" />
-                </div>
-            </div>
-</div>
-<div id="dlg" title="Add Belt">
-	<g:render template="/belt/form" />
-</div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+            
+			
+			
 
-	<!-- Work -->
-	<div class="wrapper style1">
-		<article id="tournaments">
+        </div><!-- ./wrapper -->
 
-
-
-<%--			<div id="accordion-1">--%>
-<%--				<h3>Belts</h3>--%>
-<%--				<div>--%>
-<%--					<p>--%>
-<%--						<g:render template="/belt/list" />--%>
-<%--						<button id="btn-show" class="btn" onClick="openDialog('Belt','/tournament-manager/belt/create')">Add</button>--%>
-<%--						--%>
-<%--						<div id="dlg" title="Godfather I">  --%>
-<%--						    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.   --%>
-<%--						    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.   --%>
-<%--						    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,   --%>
-<%--						    kind and benevolent to those who give respect,   --%>
-<%--						    but given to ruthless violence whenever anything stands against the good of the family.</p>  --%>
-<%--						</div> --%>
-<%--						<button id="btn-show" class="btn">Add</button>--%>
-<%--					</p>--%>
-<%--				</div>--%>
-<%--				<h3>Forms</h3>--%>
-<%--				<div>--%>
-<%--					<p>--%>
-<%--						<g:render template="/formCategory/list" />--%>
-<%--					</p>--%>
-<%--				</div>--%>
-<%--				<h3>Combat</h3>--%>
-<%--				<div>--%>
-<%--					<p>--%>
-<%--						<g:render template="/combatCategory/list" />--%>
-<%--					</p>--%>
-<%----%>
-<%--				</div>--%>
-<%--			</div>--%>
-
-
-			<div class="row double">
-				<div class="12u">
-					<ul class="actions">
-
-					</ul>
-				</div>
-			</div>
-		</article>
-	</div>
-	<g:render template="/home/templates/footer" />
-	<script>
-		$(function() {
-			//$("#accordion-1").accordion();
-			$("#default").puitabview();
-		});
-
-
-		$(function() {
-		    $('#dlg').puidialog({
-		        showEffect: 'fade',
-		        hideEffect: 'fade',
-		        minimizable: true,
-		        maximizable: true,
-		        modal: true,
-		        buttons: [{
-		                text: 'Yes',
-		                icon: 'ui-icon-check',
-		                click: function() {
-		                    $('#dlg').puidialog('hide');
-		                }
-		            },
-		            {
-		                text: 'No',
-		                icon: 'ui-icon-close',
-		                click: function() {
-		                    $('#dlg').puidialog('hide');
-		                }
-		            }
-		        ]
-		    });
-
-		    $('#btn-show').puibutton({
-		        icon: 'ui-icon-arrow-4-diag',
-		        click: function() {
-		            $('#dlg').puidialog('show');
-		        }
-		    });
-		});
-		
-
-<%--		    function openDialog(title,url) {--%>
-<%--		        $('.opened-dialogs').dialog("close");--%>
-<%----%>
-<%--		        $('<div class="opened-dialogs">').html('loading...').dialog({--%>
-<%--		            position:  ['center',20],--%>
-<%--		            open: function () {--%>
-<%--		                $(this).load(url);--%>
-<%----%>
-<%--		            },--%>
-<%--		            close: function(event, ui) {--%>
-<%--		                    $(this).remove();--%>
-<%--		            },--%>
-<%----%>
-<%--		            title: title,--%>
-<%--		            minWidth: 600            --%>
-<%--		        });--%>
-<%----%>
-<%--		        return false;--%>
-<%--		    }--%>
-		
-	</script>
-</body>
+		<g:render template="/home/templates/footer"/>
+    </body>
 </html>

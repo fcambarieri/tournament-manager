@@ -3,42 +3,33 @@ modules = {
         resource url:'js/application.js'
     }
 	
-	commonCss {
-		resource url:"css/chico.css"
-//		resource url:"css/main.css"
-//		resource url:"css/skel.css" 
-//		resource url:"css/style.css"
-//		resource url:"css/errors.css"
-//		resource url:"css/style-desktop.css"
-		resource url:"css/loginDropDown.css"
-		resource url:'css/jquery-ui.min.css'
-//		resource url:"css/jquery-ui.min.css"
+	'font-awesome' {
+		resource url: [plugin: 'font-awesome-resources', dir: 'css', file: 'font-awesome.css']
 	}
 	
-	commonJs {
-//		resource url:'js/jquery.min.js'
-		resource url:'js/jquery.scrolly.min.js'
-//		resource url:'js/jquery-ui.min.js'
-//		resource url:'js/skel.min.js'
-//		resource url:'js/init.js'
-		resource url:'js/primeui-1.1-min.js'
-//		resource url:'js/chico.min.js'
+	adminLTECss {
+		resource url: "css/bootstrap.min.css"
+//		resource url: "css/font-awesome.min.css"
+		resource url: "css/font-awesome.css"
+		resource url: "css/ionicons.min.css"
+		resource url: "css/AdminLTE.css" 
 	}
 	
-	
-	tournamentJs {
-		dependsOn 'commonJs'
-		resource url:'js/tournament.js'
+	jqueryJs {
+//		resource url: "js/jquery.min.js"
+		resource url: "js/jquery.js"
 	}
-	
-	primeJs {
-//		resource url:'js/jquery.min.js'
-//		resource url:'js/jquery-ui.min.js'
-//		resource url:'js/primeui-1.1-min.js'
+
+	landingCss {
+		resource url: "css/bootstrap.min.css"
+		resource url: "css/font-awesome.css"
+		resource url: "css/scrolling-nav.css"
 	}
-	
-	primeCss {
-//		resource url:'css/jquery-ui.min.css'
-//		resource url:'css/primeui-1.1-min.css'
+
+	landingJs {
+		resource url: "js/jquery.min.js"
+		resource url: "js/jquery.easing.min.js"
+		resource url: "js/scrolling-nav.js"
+		
 	}
 }

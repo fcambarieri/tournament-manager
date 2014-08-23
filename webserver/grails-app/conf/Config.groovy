@@ -54,12 +54,14 @@ grails.resources.adhoc.patterns = [
 	'/images/*',
 	'/css/*',
 	'/js/*',
+	'/fonts/*',
 	'/plugins/*'
 ]
 grails.resources.adhoc.includes = [
 	'/images/**',
 	'/css/**',
 	'/js/**',
+	'/fonts/**',
 	'/plugins/**'
 ]
 
@@ -131,10 +133,12 @@ grails.hibernate.osiv.readonly = false
 environments {
 	development {
 		grails.logging.jul.usebridge = true
+		grails.serverURL = "http://localhost:8080"
 	}
 	production {
 		grails.logging.jul.usebridge = false
 		// TODO: grails.serverURL = "http://www.changeme.com"
+		grails.serverURL = "http://www.tournament-manager.com.ar"
 	}
 }
 
@@ -160,7 +164,9 @@ log4j = {
 
 	debug  'tournament.manager'
 
-	root { debug 'stdout' }
+    debug 'org.springframework.security'
+
+	root { root 'stdout' }
 }
 
 
@@ -172,20 +178,34 @@ grails.plugin.springsecurity.authority.className = 'tournament.manager.auth.Role
 //grails.plugin.springsecurity.rejectIfNoRule = false
 //grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 
+
+//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = "${grails.serverURL}/${appName}/login/auth"
+grails.plugin.springsecurity.authenticationFailureUrl="${grails.serverURL}/${appName}"
+grails.plugin.springsecurity.successHandler.defaultTargetUrl="${grails.serverURL}/${appName}/tournament/list"
+grails.plugin.springsecurity.useSessionFixationPrevention = true
+grails.plugin.springsecurity.useSecurityEventListener = true
+grails.plugin.springsecurity.onAbstractAuthenticationFailureEvent = { e, appCtx ->
+   println "\nERROR auth failed for user $e.authentication.name: $e.exception.message\n"
+}
+
+
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              	['permitAll'],
-	'/registration/*':              	['permitAll'],
-	'/schools/*':                		['permitAll'],
-	'/belt/*':                		['permitAll'],
-	'/formCategory/*':                	['permitAll'],
-	'/combatCategory/*':               ['permitAll'],
-	'/combatWeigth/*':                	['permitAll'],
-	'/tournament/*':                	['permitAll'],
+/*	'/registration/*':              	["permitAll"],
+	'/schools/*':                		["hasRole('ROLE_USER')"],
+	'/belt/*':                			["hasRole('ROLE_USER')"],
+	'/students/*':                		["hasRole('ROLE_USER')"],
+	'/formCategory/*':                	["hasRole('ROLE_USER')"],
+	'/combatCategory/*':                ["hasRole('ROLE_USER')"],
+	'/combatWeigth/*':                	["hasRole('ROLE_USER')"],
+	'/tournament/*':                	["hasRole('ROLE_USER')"],*/
 	'/index':                         	['permitAll'],
 	'/index.gsp':                     	['permitAll'],
 	'/assets/**':                     	['permitAll'],
 	'/**/js/**':                      	['permitAll'],
+	'/**/fonts/**':                     ['permitAll'],
 	'/**/css/**':                     	['permitAll'],
 	'/**/images/**':                  	['permitAll'],
+	'/**/img/**':                  		['permitAll'],
 	'/**/favicon.ico':                	['permitAll']]
 

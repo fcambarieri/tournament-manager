@@ -6,11 +6,16 @@ import grails.plugin.springsecurity.SpringSecurityService
 import tournament.manager.auth.Role;
 import tournament.manager.auth.User
 import tournament.manager.auth.UserRole;
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 
 class RegistrationController {
 
 	EmailConfirmationService emailConfirmationService
-	SpringSecurityService springSecurityService
+	def springSecurityService
+	def userDetailsService
+	def authenticationManager
 	
 	def index() {
 		[model: new User()]
@@ -29,9 +34,19 @@ class RegistrationController {
 				} else {
 					UserRole.create(user, Role.findByAuthority("ROLE_USER"), true)
 					springSecurityService.reauthenticate(user.username)
+					autoLogin(user.username, user.password)
 					sendConfirmationEmail(user)
 					render (view:"congrats",model:[userInstance:user])
 				}
+		}
+	}
+	
+	private void autoLogin(username, password) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken (userDetails, password, userDetails.getAuthorities());
+//		authenticationManager.authenticate(auth);
+		if(auth.isAuthenticated()) {
+			SecurityContextHolder.getContext().setAuthentication(auth);
 		}
 	}
 	
@@ -59,14 +74,14 @@ class RegistrationController {
 
 	def confirm () {
 		
-		User user = User.findByConfirmCode(id)
-		if(!userInstance){
+		User  user= User.findByVerificationCode(params.id)
+		if(!user){
 			return;
 		}
 
 		user.status = "active"
 		//userInstance.enabled=true;
-		if (!userInstance.save(flush: true)) {
+		if (!user.save(flush: true)) {
 			render(view: "congrats", model: [userInstance:user, message: 'Problem activating account.'])
 			return
 		}

@@ -1,4 +1,6 @@
 import tournament.manager.auth.Role
+import tournament.manager.auth.User
+import tournament.manager.auth.UserRole
 
 class BootStrap {
 
@@ -8,6 +10,12 @@ class BootStrap {
 				new Role(authority: name).save(flush: true, failOnError:true)
 			}
 		}
+		
+		User test = new User(username:"fer",password:"pass", email:"fcambarieri@gmail.com",enabled:true,
+				accountExpired : false , accountLocked : false ,passwordExpired : false, firstName:"fer",lastName:"fer", status:"pending",verificationCode:"verificationCode", confirmPassword:"pass")
+		test.save(flush: true, failOnError:true)
+		UserRole.create(test, Role.findByAuthority("ROLE_USER"), true)
+
 //		if (Role.findByAuthority('ROLE_ADMIN') == null) {
 //			new Role(authority: 'ROLE_ADMIN').save(flush: true)
 //		}
