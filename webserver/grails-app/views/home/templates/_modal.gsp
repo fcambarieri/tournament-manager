@@ -13,9 +13,13 @@
                   </div>
                   <div class="modal-footer clearfix">
 
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
-
+                      <%--<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
                       <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-check"></i>Save</button>
+                      --%>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">${message(code: 'default.button.close.label', default: 'Close')}</button>
+                    <button type="button" class="btn btn-primary">${message(code: 'default.button.save.label', default: 'Save')}</button>
+
+
                   </div>
               </g:form>
           </div><!-- /.modal-content -->

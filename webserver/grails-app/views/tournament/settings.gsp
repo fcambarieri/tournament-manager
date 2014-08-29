@@ -30,7 +30,22 @@
                 <section class="content-header">
                     <h1>
                        
-                        <small>it all starts here</small>
+                        <small><g:message code="combatCategory.tournament.label" default="Tournament" />
+                        <span class="required-indicator">*</span></small>
+                        <select id="tournament" name="tournament.id" optionKey="id" required=""  class="form-control">
+
+                            <g:each var="tournament" in="${tournaments}">
+                               
+                                <option value="${tournament.id}" ${tournament.id.toString().equals(tournamentId?.toString()) ? 'selected' : ''}>${tournament.name}</option>
+                            </g:each>
+
+                        </select>
+
+
+
+                        <%-- <g:select id="tournament" name="tournament.id" from="${tournament.manager.Tournament.list()}" optionKey="id" required=""  class="form-control"/>
+                           --%> 
+
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -41,12 +56,12 @@
 
                 <!-- Main content -->
                 <section class="content">
- 						
+ 						     <div id="message"></div>
  							<div class="box box-info">
                                 <div class="box-header">
                                     <h3 class="box-title">Belts</h3>
                                     <div class="box-tools pull-right">
-                                        <div class="label bg-aqua">Label</div>
+                                        
                                     </div>
                                 </div>
                                 <div class="box-body">
@@ -60,21 +75,22 @@
                                 <div class="box-header">
                                     <h3 class="box-title">Combat Categories</h3>
                                     <div class="box-tools pull-right">
-                                        <div class="label bg-aqua">Label</div>
+                                        
                                     </div>
                                 </div>
                                 <div class="box-body">
                                     <g:render template="/combatCategory/list"></g:render>
+                                    
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
-                                    
+                                    	<a href=""><i class="fa fa-plus"></i></a>
                                 </div><!-- /.box-footer-->
                             </div>
  						     <div class="box box-info">
                                 <div class="box-header">
                                     <h3 class="box-title">Poomse Categories</h3>
                                     <div class="box-tools pull-right">
-                                        <div class="label bg-aqua">Label</div>
+                                        
                                     </div>
                                 </div>
                                 <div class="box-body">
@@ -94,5 +110,96 @@
         </div><!-- ./wrapper -->
 
 		<g:render template="/home/templates/footer"/>
+
+		
+        <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        
+        
+        <r:require modules="tree" />
+        
+        <script type="text/javascript">
+            function showForm(obj) {
+                    
+                    var $row = $(obj);
+                    var uri =  $row.attr("uri");
+                    console.log(uri);
+                    //var options = {"remote":obj.data};
+                    $('#myModal').modal({
+                         'show':true,
+                         'remote': uri  
+                    });
+            }
+            $(document).ready(function() {
+                var url = "${reloadUri}";
+
+                $('#treeCategory').treegrid();
+
+                $('#tournament').on('change', function() {
+                    //alert( this.value ); // or $(this).val()
+                    goTo=url+"?tournamentId="+$(this).val();
+                    window.location.href = goTo;
+                });
+
+                var beltTable = $('#beltTable').DataTable();
+
+
+                $("#beltSave").click(function(){
+                    saveBelt("post");
+                });
+
+              
+
+                
+                
+                $('#beltModal').on('hidden.bs.modal', function (e) {
+                  $("#name").val("");
+                });
+
+                $('#myModal').on('shown.bs.modal', function (e) {
+                    $("#update").click(function(){
+                        saveBelt("put");
+                    });  
+                })
+
+                function saveBelt(method) {
+                    var id = $("#beltId").val();
+                    var description = $("#description").val();
+                    var tournamentId = $("#tournament").val();;
+                    $.post("${createLink(controller: 'belt', action:'ajaxSave')}",
+                              {
+                                "id":id,
+                                "description":description,
+                                "tournamentId":tournamentId
+                              },
+                              function(data,status){
+                                console.log ("status:"+status+"data:"+ JSON.stringify(data));
+                                    if (data.status == 201) {
+                                        $('#beltModal').modal('hide');
+                                        $('#myModal').modal('hide');
+                                        
+                                        if (method == "post") {
+                                            beltTable.row.add( [
+                                                data.entity.description
+                                            ] ).draw();    
+                                        } else {
+
+                                        }
+                                        
+                                        
+                                        showSuccess(data);    
+                                    } else {
+                                        alert("status:"+status+"data:"+ JSON.stringify(data));    
+                                    }
+                                    
+                             });
+                }
+
+                function showSuccess(data) {
+                    $("#message").html('<div class="alert alert-success alert-dismissable"><i class="fa fa-check"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><b>Success!</b> </div>');
+                }
+            });
+        </script>
+
+
     </body>
 </html>

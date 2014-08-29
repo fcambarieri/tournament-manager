@@ -15,6 +15,4 @@ class Students {
 		docNumber(nullable:true)
 		picture(nullable:true)
     }
-	
-	static belongsTo = [school:Schools]
 }

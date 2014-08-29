@@ -5,6 +5,7 @@ package tournament.manager
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.security.access.annotation.Secured
+import grails.converters.JSON
 
 @Transactional(readOnly = true)
 @Secured("hasRole('ROLE_USER')")
@@ -48,8 +49,27 @@ class BeltController extends AbstractController{
         }
     }
 
+    def ajaxSave () {
+        Belt belt = new Belt()
+        if (params.id) {
+            belt = Belt.get(params.id)
+        }
+        belt.description = params.description
+        belt.tournament = Tournament.get(params.tournamentId)
+        def map
+        if (belt.save(flush:true)) {
+            map = ["status":201,"entity":["id":belt.id, "description":belt.description, "tournament.id":belt.tournament.id]]
+        } else {
+            map = ["status":400,"errors":belt.errors]
+        }
+        
+        def json = map as JSON   
+        render json
+    }
+
     def edit(Belt beltInstance) {
-        respond beltInstance
+        println "belt: $beltInstance"
+        render ( view:'/home/forms/editModal', model:[beltInstance:beltInstance,"title":message(code: 'beltInstance.label', default: 'Belt'),"templateName":"/belt/form"])
     }
 
     @Transactional

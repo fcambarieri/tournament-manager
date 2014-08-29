@@ -72,7 +72,36 @@ class TournamentController {
 		boolean isLoggedIn = springSecurityService.isLoggedIn()
 		return isLoggedIn ? springSecurityService.loadCurrentUser() : null
 	}
+
 	def settings () {
-		
+		def tournamentId = params.tournamentId
+		def tournaments = getTournamentsByOwner()//Tournament.where {owner==getCurrentUser()}
+		def map = [
+				reloadUri:"${Holders.config.grails.serverURL}${request.getSession().getServletContext().getContextPath()}/tournament/settings",
+				tournaments:tournaments,
+				tournamentId:tournamentId
+		]
+		if (tournamentId != null && tournamentId.isNumber()) {
+			map.beltInstanceList = Belt.where{tournament.id==tournamentId}
+			map.combatCategoryInstanceList = CombatCategory.where{tournament.id==tournamentId}
+			map.formCategoryInstanceList = FormCategory.where{tournament.id==tournamentId}
+		}else{
+			def tournament = tournaments.size() > 0 ? tournaments.get(0) : null
+			if (tournament != null) {
+				map.beltInstanceList = Belt.findAllByTournament(tournament)	
+				map.combatCategoryInstanceList = CombatCategory.findAllByTournament(tournament)	
+				map.formCategoryInstanceList = FormCategory.findAllByTournament(tournament)	
+			}
+		}
+		map
 	}
+
+	def getTournamentsByOwner() {
+		def criteria = Tournament.createCriteria()
+		def tournaments = criteria.list {
+			eq("owner", getCurrentUser())
+		}
+		return tournaments
+	}
+
 }

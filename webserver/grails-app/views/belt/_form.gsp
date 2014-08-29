@@ -9,6 +9,8 @@
 			<span class="required-indicator">*</span>
 		</label>
           <g:textField id="description" class="form-control" name="description" maxlength="30" required="" value="${beltInstance?.description}"/>
+          <g:hiddenField name="beltId" value="${beltInstance?.id}" />
+          <g:hiddenField name="beltVersion" value="${beltInstance?.version}" />
      </div>
  </div>
 

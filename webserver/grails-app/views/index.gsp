@@ -51,6 +51,9 @@
                     </sec:ifNotLoggedIn>
 
                     <sec:ifLoggedIn>
+                        <li>
+                            <g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.admin.label', default: 'Admin')}</g:link>
+                        </li>
 
                         <li>
                             <i class="glyphicon glyphicon-user"></i>

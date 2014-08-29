@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 import org.springframework.security.access.annotation.Secured
 
 @Transactional(readOnly = true)
+@Secured("hasRole('ROLE_USER')")
 class CombatWeightController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

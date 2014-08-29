@@ -15,11 +15,6 @@
     <body class="bg-black">
         <!-- header logo: style can be found in header.less -->
 
-
-
-        
-
-       
         
        	  <div class="form-box" id="login-box">
             <div class="header">Sign In</div>

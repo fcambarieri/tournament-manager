@@ -25,10 +25,6 @@
 
 
 
-
-
-
-
 <div class="form-box" id="login-box">
 	<div class="header">Register New Membership</div>
 	<g:form id="reg" name="reg"

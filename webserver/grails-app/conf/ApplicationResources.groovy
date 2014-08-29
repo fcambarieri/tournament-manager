@@ -32,4 +32,10 @@ modules = {
 		resource url: "js/scrolling-nav.js"
 		
 	}
+	
+	tree {
+		//depenon 'adminLTECss'
+		resource url: "js/plugins/tree/jquery.treegrid.js"
+		resource url: "js/plugins/tree/jquery.treegrid.bootstrap3.js"
+	}
 }

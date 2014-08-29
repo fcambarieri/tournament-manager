@@ -16,7 +16,9 @@ class UrlMappings {
 		
 		"/combat_category/$action?"(controller: "combatCategory")
 		"/combat_weigth/$action?"(controller: "combatWeigth")
-		"/form_category/$action?"(controller: "cormCategory")
+		"/form_category/$action?"(controller: "formCategory")
+		"/poomse_category/$action?"(controller: "formCategory")
+		"/poomseCategory/$action?"(controller: "formCategory")
 		
 		
 //		"/$controller/css/images/$name" {

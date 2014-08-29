@@ -1,5 +1,7 @@
 package tournament.manager
 
+import java.util.Date;
+
 class Participants {
 
 	String combatStatus
@@ -21,6 +23,6 @@ class Participants {
 			belt:Belt,
 			formCategory:FormCategory,
 			combatCategory:CombatCategory,
-			combatWeight: CombatWeight
-		]
+			combatWeight: CombatWeight,
+	]
 }

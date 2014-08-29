@@ -14,15 +14,23 @@ class FormCategoryController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond FormCategory.list(params), model:[formCategoryInstanceCount: FormCategory.count()]
+        //respond FormCategory.list(params), model:[formCategoryInstanceCount: FormCategory.count()]
+
+        def formCategoryInstanceList = FormCategory.list(params)
+        def model = [ "controller":"Poomse Category","action": params.action, "title":"Poomse","templateName":"/formCategory/list", formCategoryInstanceList:formCategoryInstanceList]
+        render (view:"/home/forms/form", model:model)
     }
 
     def show(FormCategory formCategoryInstance) {
-        respond formCategoryInstance
+        //respond formCategoryInstance
+        def model = [ "controller":"Poomse Category","action": params.action, "title":"Poomse","templateName":"/formCategory/show", formCategoryInstance:formCategoryInstance]
+        render (view:"/home/forms/form", model:model)
     }
 
     def create() {
-        respond new FormCategory(params)
+        //respond new FormCategory(params)
+        def model = [ "controller":"Poomse Category","action": params.action, "title":"Poomse","templateName":"/formCategory/create", formCategoryInstance: new FormCategory(params)]
+        render (view:"/home/forms/form", model:model)
     }
 
     @Transactional

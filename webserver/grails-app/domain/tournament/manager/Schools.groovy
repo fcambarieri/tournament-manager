@@ -17,4 +17,6 @@ class Schools {
     }
 	
 	static belongsTo = [owner:User]
+
+	static hasManu = [students : Students]
 }

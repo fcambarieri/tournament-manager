@@ -14,11 +14,16 @@ class CombatCategoryController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond CombatCategory.list(params), model:[combatCategoryInstanceCount: CombatCategory.count()]
+        //params.owner = getCurrentUser()
+        //respond CombatCategory.list(params), model:[combatCategoryInstanceCount: CombatCategory.count()]
+        def combatCategoryInstanceList = CombatCategory.list(params)
+        def model = [ "controller":"Combat Category","action": params.action, "title":"combat","templateName":"/combatCategory/list", combatCategoryInstanceList:combatCategoryInstanceList]
+
+        render (view:"/home/forms/form", model:model)
     }
 
     def show(CombatCategory combatCategoryInstance) {
-        respond combatCategoryInstance
+        render (view:"/home/forms/form", model:[combatCategoryInstance:combatCategoryInstance, "controller":"Combat Category","action": params.action, "title":"combat","templateName":"/combatCategory/show"])
     }
 
     def create() {
@@ -49,7 +54,8 @@ class CombatCategoryController {
     }
 
     def edit(CombatCategory combatCategoryInstance) {
-        respond combatCategoryInstance
+        //respond combatCategoryInstance
+        render (view:"/home/forms/form", model:[combatCategoryInstance:combatCategoryInstance, "controller":"Combat Category","action": params.edit, "title":"combat","templateName":"/combatCategory/edit"])
     }
 
     @Transactional
