@@ -65,11 +65,13 @@
                                             <div class="message" role="status">${flash.message}</div>
                                         </g:if>
                                         <g:hasErrors bean="${combatCategoryInstance}">
-                                        <ul class="errors" role="alert">
-                                            <g:eachError bean="${combatCategoryInstance}" var="error">
-                                            <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                                            </g:eachError>
-                                        </ul>
+                                        <div class="alert alert-danger" role="alert">
+	                                        <ul class="errors" role="alert">
+	                                            <g:eachError bean="${combatCategoryInstance}" var="error">
+	                                            <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+	                                            </g:eachError>
+	                                        </ul>
+                                        </div>
                                         </g:hasErrors>
                                         
                                                 <g:render template="form"/>

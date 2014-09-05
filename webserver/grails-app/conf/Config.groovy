@@ -142,6 +142,8 @@ environments {
 	}
 }
 
+grails.app.context = "/"
+
 // log4j configuration
 log4j = {
 	// Example of changing the log pattern for the default console appender:
@@ -183,10 +185,10 @@ grails.plugin.springsecurity.authority.className = 'tournament.manager.auth.Role
 grails.plugin.springsecurity.authenticationFailureUrl="${grails.serverURL}/${appName}"
 grails.plugin.springsecurity.successHandler.defaultTargetUrl="${grails.serverURL}/${appName}/tournament/list"
 grails.plugin.springsecurity.useSessionFixationPrevention = true
-grails.plugin.springsecurity.useSecurityEventListener = true
-grails.plugin.springsecurity.onAbstractAuthenticationFailureEvent = { e, appCtx ->
-   println "\nERROR auth failed for user $e.authentication.name: $e.exception.message\n"
-}
+//grails.plugin.springsecurity.useSecurityEventListener = true
+//grails.plugin.springsecurity.onAbstractAuthenticationFailureEvent = { e, appCtx ->
+//   println "\nERROR auth failed for user $e.authentication.name: $e.exception.message\n"
+//}
 
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [

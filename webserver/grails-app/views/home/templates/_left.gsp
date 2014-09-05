@@ -45,9 +45,13 @@
                             <ul class="treeview-menu">
                                 <li><g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.tournament.label', default: 'Tournament')}</g:link></li>
                                 <li><g:link controller="tournament" action="settings"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.settings.label', default: 'Settings')}</g:link></li>
-                                <li><g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.brackets.label', default: 'Brackets')}</g:link></li>
+<%--                                <li><g:link controller="participants" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.participants.label', default: 'Participants')}</g:link></li>--%>
+<%--                                <li><g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.brackets.label', default: 'Brackets')}</g:link></li>--%>
                             </ul>
                         </li>
+                        <li><g:link controller="participants" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.participants.label', default: 'Participants')}</g:link></li>
+                        <li><g:link controller="brackets" action="potencialBrackets"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.brackets.label', default: 'Brackets')}</g:link></li>
+                        <li><g:link controller="schools" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.school.label', default: 'Schools')}</g:link></li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
@@ -56,7 +60,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><g:link controller="schools" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.school.label', default: 'Schools')}</g:link></li>
-                                <li><g:link controller="students" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.students.label', default: 'Students')}</g:link></li>
+                                <li><g:link controller="participants" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.participants.label', default: 'Participants')}</g:link></li>
                             </ul>
                         </li>
 <%--                        <li class="treeview">--%>

@@ -8,7 +8,7 @@ class Schools {
 	String phoneNumber
 	String email
 	Date dateCreated
-	Date dateUpdated
+	Date lastUpdated
 	
     static constraints = {
 		name(blank:false, size:2..30)
@@ -18,5 +18,13 @@ class Schools {
 	
 	static belongsTo = [owner:User]
 
-	static hasManu = [students : Students]
+	static hasMany = [participants : Participants]
+
+	static mapping = {
+		autoTimestamp true
+	}
+	
+	public String toString() {
+		return "$name"
+	}
 }

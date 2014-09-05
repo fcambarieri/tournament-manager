@@ -2,9 +2,7 @@
 <%@ page import="tournament.manager.FormCategory" %>
 		
 		<div id="list-formCategory" class="box-body table-responsive no-padding" role="main">
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
+
 			<table class="table table-hover">
 			<thead>
 					<tr>
@@ -34,28 +32,13 @@
 						<td>${fieldValue(bean: formCategoryInstance, field: "tournament")}</td>
 
 						<td>
-
-							<div class="btn-group">
-                                <button type="button" class="btn btn-default"><g:message code="defualt.action.select" default="Select"/></button>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                    	<g:link action="edit" resource="${formCategoryInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>	
-                                    </li>	
-                                    <li>         
-                                    	<g:form url="[resource:formCategoryInstance, action:'delete']" >
-	 										<g:link  action="delete" resource="${formCategoryInstance}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-	 											<g:message code="default.button.delete.label" default="Delete" />
-	 										</g:link>                                   	
- 										</g:form>
-                                    </li>
-                                </ul>
-                            </div>
+							<g:link action="edit" resource="${formCategoryInstance}" title="${message(code: 'default.button.edit.label', default: 'Edit')}">
+								<i class="fa fa-edit"></i>
+							</g:link>
+							<g:form url="[resource:formCategoryInstance, action:'delete']" >
+								<button type="submit" class="btn btn-danger" title="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash-o"></i></button>                                 	
+							</g:form>
 						</td>
-					
 					</tr>
 				</g:each>
 				</tbody>

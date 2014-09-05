@@ -8,68 +8,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Martial Art Tournament Manager">
     <meta name="author" content="Fernando Cambarieri">
-    <meta name="layout" content="landing"/>
+    <meta name="layout" content="main"/>
 
     <title>Tournament Manager</title>
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="skin-blue">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-
-                    <sec:ifNotLoggedIn>
-                        <li><g:link controller="registration" action="index">${message(code: 'default.link.signup.label', default: 'Sign up')}</g:link></li>
-                        <li><g:link controller="login" action="auth">${message(code: 'default.link.sigin.label', default: 'Sign in')}</g:link></li>
-                    </sec:ifNotLoggedIn>
-
-                    <sec:ifLoggedIn>
-                        <li>
-                            <g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.admin.label', default: 'Admin')}</g:link>
-                        </li>
-
-                        <li>
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span><sec:username/> </span>
-                            <mat:logout class="page-scroll"/>
-                        </li>
-
-                    </sec:ifLoggedIn>
-
-
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+	<g:render template="/home/templates/nav" model="['loginLink':true]"/>
+<%--    <!-- Navigation -->--%>
+<%--    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">--%>
+<%--        <div class="container">--%>
+<%--            <div class="navbar-header page-scroll">--%>
+<%--                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">--%>
+<%--                    <span class="sr-only">Toggle navigation</span>--%>
+<%--                    <span class="icon-bar"></span>--%>
+<%--                    <span class="icon-bar"></span>--%>
+<%--                    <span class="icon-bar"></span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%----%>
+<%--            <!-- Collect the nav links, forms, and other content for toggling -->--%>
+<%--            <div class="collapse navbar-collapse navbar-ex1-collapse">--%>
+<%--                <ul class="nav navbar-nav">--%>
+<%--                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->--%>
+<%--                    <li class="hidden">--%>
+<%--                        <a class="page-scroll" href="#page-top"></a>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a class="page-scroll" href="#about">About</a>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a class="page-scroll" href="#services">Services</a>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a class="page-scroll" href="#contact">Contact</a>--%>
+<%--                    </li>--%>
+<%----%>
+<%--                    <sec:ifNotLoggedIn>--%>
+<%--                        <li><g:link controller="registration" action="index">${message(code: 'default.link.signup.label', default: 'Sign up')}</g:link></li>--%>
+<%--                        <li><g:link controller="login" action="auth">${message(code: 'default.link.sigin.label', default: 'Sign in')}</g:link></li>--%>
+<%--                    </sec:ifNotLoggedIn>--%>
+<%----%>
+<%--                    <sec:ifLoggedIn>--%>
+<%--                        <li>--%>
+<%--                            <g:link controller="tournament" action="index"><i class="fa fa-angle-double-right"></i> ${message(code: 'default.link.admin.label', default: 'Admin')}</g:link>--%>
+<%--                        </li>--%>
+<%----%>
+<%--                        <li>--%>
+<%--                            <i class="glyphicon glyphicon-user"></i>--%>
+<%--                            <span><sec:username/> </span>--%>
+<%--                            <mat:logout class="page-scroll"/>--%>
+<%--                        </li>--%>
+<%----%>
+<%--                    </sec:ifLoggedIn>--%>
+<%----%>
+<%----%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--            <!-- /.navbar-collapse -->--%>
+<%--        </div>--%>
+<%--        <!-- /.container -->--%>
+<%--    </nav>--%>
 
     <!-- Intro Section -->
     <section id="intro" class="intro-section">

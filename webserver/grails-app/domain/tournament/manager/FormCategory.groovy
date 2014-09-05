@@ -13,4 +13,8 @@ class FormCategory {
     }
 	
 	static belongsTo = [tournament:Tournament]
+	
+	public String toString() {
+		return "$name $minAge $maxAge years"
+	}
 }

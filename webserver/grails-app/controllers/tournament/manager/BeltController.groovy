@@ -12,10 +12,14 @@ import grails.converters.JSON
 class BeltController extends AbstractController{
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+	
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Belt.list(params), model:[beltInstanceCount: Belt.count()]
+//        respond Belt.list(params), model:[beltInstanceCount: Belt.count()]
+		def beltInstanceList = Belt.list(params)
+		
+		listFormView([beltInstanceList:beltInstanceList,beltInstanceCount:beltInstanceList.size()], params)
     }
 
     def show(Belt beltInstance) {
@@ -23,8 +27,11 @@ class BeltController extends AbstractController{
     }
 
     def create() {
-        respond new Belt(params)
+//        respond new Belt(params)
+		formView(["action":"save",tournaments:getTournaments(), tournamentSelected: getTournamentSelected()], params)
     }
+	
+
 
     @Transactional
     def save(Belt beltInstance) {
@@ -34,19 +41,25 @@ class BeltController extends AbstractController{
         }
 
         if (beltInstance.hasErrors()) {
-            respond beltInstance.errors, view:'create'
+//            respond beltInstance.errors, view:'create'
+			formView([instance:beltInstance,tournaments:getTournaments()], params)
             return
         }
 
-        beltInstance.save flush:true
+        if (!beltInstance.save (flush:true)) {
+			formView([instance:beltInstance,tournaments:getTournaments()], params)
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'beltInstance.label', default: 'Belt'), beltInstance.id])
-                redirect beltInstance
-            }
-            '*' { respond beltInstance, [status: CREATED] }
-        }
+		flash.message = message(code: 'default.created.message', args: [message(code: 'beltInstance.label', default: 'Belt'), beltInstance.id])
+		//listFormView([instance:combatCategoryInstance], params)
+		redirect view:"index", controller:"belt"
+//        request.withFormat {
+//            form multipartForm {
+//                flash.message = message(code: 'default.created.message', args: [message(code: 'beltInstance.label', default: 'Belt'), beltInstance.id])
+//                redirect beltInstance
+//            }
+//            '*' { respond beltInstance, [status: CREATED] }
+//        }
     }
 
     def ajaxSave () {
@@ -67,9 +80,15 @@ class BeltController extends AbstractController{
         render json
     }
 
-    def edit(Belt beltInstance) {
-        println "belt: $beltInstance"
-        render ( view:'/home/forms/editModal', model:[beltInstance:beltInstance,"title":message(code: 'beltInstance.label', default: 'Belt'),"templateName":"/belt/form"])
+    def edit() {
+//        println "belt: $beltInstance"
+//        render ( view:'/home/forms/editModal', model:[beltInstance:beltInstance,"title":message(code: 'beltInstance.label', default: 'Belt'),"templateName":"/belt/form"])
+//		editFormView(editModel(beltInstance), params)
+		Long id = new Long(params.id)
+		Belt beltInstance = Belt.get(id)
+		def model = editModel(beltInstance)
+		model.tournaments=getTournaments()
+		editFormView(model, params)
     }
 
     @Transactional
@@ -80,19 +99,32 @@ class BeltController extends AbstractController{
         }
 
         if (beltInstance.hasErrors()) {
-            respond beltInstance.errors, view:'edit'
+//            respond beltInstance.errors, view:'edit'
+			def model = editModel(beltInstance)
+			model.tournaments=getTournaments()
+			editFormView(model, params)
             return
         }
 
-        beltInstance.save flush:true
+        if (!beltInstance.save (flush:true)) {
+			def model = editModel(beltInstance)
+			model.tournaments=getTournaments()
+			editFormView(model, params)
+			return
+		}
+		
+		
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'beltInstance.label', default: 'Belt'), beltInstance.id])
+		//listFormView([instance:combatCategoryInstance], params)
+		redirect view:"index", controller:"belt"
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
-                redirect beltInstance
-            }
-            '*'{ respond beltInstance, [status: OK] }
-        }
+//        request.withFormat {
+//            form multipartForm {
+//                flash.message = message(code: 'default.updated.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
+//                redirect beltInstance
+//            }
+//            '*'{ respond beltInstance, [status: OK] }
+//        }
     }
 
     @Transactional
@@ -103,24 +135,39 @@ class BeltController extends AbstractController{
             return
         }
 
-        beltInstance.delete flush:true
+        if (!beltInstance.delete (flush:true)) {
+			flash.errorMessage = message(code: 'default.deleted.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
+		} else {
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		redirect action:"index", method:"GET", controller:"belt"
+//        request.withFormat {
+//            form multipartForm {
+//                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Belt.label', default: 'Belt'), beltInstance.id])
+//                redirect action:"index", method:"GET"
+//            }
+//            '*'{ render status: NO_CONTENT }
+//        }
     }
 
     protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'beltInstance.label', default: 'Belt'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+		flash.errorMessage = message(code: 'default.not.found.message', args: [message(code: 'beltInstance.label', default: 'Belt'), params.id])
+		redirect action: "index", method: "GET"
+//        request.withFormat {
+//            form multipartForm {
+//                flash.message = message(code: 'default.not.found.message', args: [message(code: 'beltInstance.label', default: 'Belt'), params.id])
+//                redirect action: "index", method: "GET"
+//            }
+//            '*'{ render status: NOT_FOUND }
+//        }
     }
+	
+	public Object getDomainInstance(Object params) {
+		return new Belt(params);
+	}
+	
+//	public Object getTitle() {
+//		return "Belts"
+//	}
 }

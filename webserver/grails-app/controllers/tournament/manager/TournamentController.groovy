@@ -82,6 +82,7 @@ class TournamentController {
 				tournamentId:tournamentId
 		]
 		if (tournamentId != null && tournamentId.isNumber()) {
+			setTournamentSelected(tournamentId)
 			map.beltInstanceList = Belt.where{tournament.id==tournamentId}
 			map.combatCategoryInstanceList = CombatCategory.where{tournament.id==tournamentId}
 			map.formCategoryInstanceList = FormCategory.where{tournament.id==tournamentId}
@@ -95,6 +96,34 @@ class TournamentController {
 		}
 		map
 	}
+	
+	
+	def ajaxSettings = {
+		
+		if (!params.tournamentId) {
+			render test: "{'error':'select tournament'}", status : 400
+			return
+		}
+		
+		def tournamentId = new Long(params.tournamentId)
+		def beltInstanceList = Belt.where{tournament.id==tournamentId}
+		def combatCategoryInstanceList = CombatCategory.where{tournament.id==tournamentId}
+		def formCategoryInstanceList = FormCategory.where{tournament.id==tournamentId}
+		def data = [belts:[],combat_categories:[],poomse_categories:[]];
+		beltInstanceList.each { b ->
+			data.belts << ["id": b.id, "description": b.description]
+		}
+		combatCategoryInstanceList.each { b ->
+			data.combat_categories << ["id": b.id, "description": b.toString()]
+		}
+		formCategoryInstanceList.each { b ->
+			data.poomse_categories << ["id": b.id, "description": b.toString()]
+		}
+		def json = data as JSON
+		//render test: json.toString(), status : 200
+		render json
+	}
+	
 
 	def getTournamentsByOwner() {
 		def criteria = Tournament.createCriteria()

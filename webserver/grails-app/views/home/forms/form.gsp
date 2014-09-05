@@ -40,36 +40,61 @@
 				
                 <!-- Main content -->
                 <section class="content">
- 						    <div id="message"></div>
- 						
- 							<div class="box box-info">
+<%--                	<div class="row">--%>
+ 							<div class="box box-primary">
                                 <div class="box-header">
                                     <h3 class="box-title">${title}</h3>
-                                    <div class="box-tools pull-right">
-                                        <div class="label bg-aqua">Label</div>
-                                    </div>
+<%--                                    <div class="box-tools pull-right">--%>
+<%--                                        <div class="label bg-aqua">Label</div>--%>
+<%--                                    </div>--%>
                                 </div>
-                                <div class="box-body">
-                                    
-       
-                                <g:render template="${templateName}"/>    
-                                
-
-
-
-                                </div><!-- /.box-body -->
-                                <div class="box-footer">
-                                    
-                                </div><!-- /.box-footer-->
+                                <div id="message"  role="alert"></div>
+                       			<g:if test="${flash.errorMessage}">
+									<div class="alert alert-danger" role="alert">${flash.errorMessage}</div>
+								</g:if> 
+								
+								<g:if test="${flash.message}">
+									<div class="alert alert-success" role="alert">${flash.message}</div>
+								</g:if>
+								
+				                <g:hasErrors bean="${instance}">
+				                	<div id="message" class="alert alert-danger" role="alert">
+										<ul class="errors" role="alert">
+											<g:eachError bean="${instance}" var="error">
+											<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>>
+												<g:message error="${error}"/></li>
+											</g:eachError>
+										</ul>
+									</div>
+								</g:hasErrors>
+										
+                                <g:form url="[resource:instance, action:action]" method="${method}" role="form" >
+	                                <div class="box-body">
+	                                	
+	                                	<g:render template="${templateName}"/>    
+	
+	                                </div><!-- /.box-body -->
+	                                <div class="box-footer">
+	                                     
+	                                     <g:if test="{buttonNameTemplate != null}">
+	                                    	<g:render template="${buttonNameTemplate}"/> 
+	                                     </g:if>
+										  
+										
+	                                </div><!-- /.box-footer-->
+                                </g:form>
                             </div>
-                            
-
+<%--					</div>--%>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
 
         </div><!-- ./wrapper -->
 
 		<g:render template="/home/templates/footer"/>
+		
+		<g:if test="${scriptName}"> 
+			<g:render template="${scriptName}"/>
+		</g:if>
 		
     </body>
 </html>

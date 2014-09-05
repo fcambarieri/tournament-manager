@@ -16,4 +16,8 @@ class CombatCategory {
 	static belongsTo = [tournament:Tournament]
 	
 	static hasMany = [weights : CombatWeight]
+	
+	public String toString() {
+		return "[$sex] ${name} ($minAge - $maxAge) years"
+	}
 }

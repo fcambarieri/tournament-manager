@@ -11,4 +11,8 @@ class CombatWeight {
     }
 	
 	static belongsTo = [combatCategory : CombatCategory]
+	
+	public String toString() {
+		return "$minWeight - $maxWeight kg"
+	}
 }

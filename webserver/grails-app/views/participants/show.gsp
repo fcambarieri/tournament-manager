@@ -23,6 +23,24 @@
 			</g:if>
 			<ol class="property-list participants">
 			
+				<g:if test="${participantsInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="participants.name.label" default="Name" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${participantsInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${participantsInstance?.lastName}">
+				<li class="fieldcontain">
+					<span id="lastName-label" class="property-label"><g:message code="participants.lastName.label" default="Last Name" /></span>
+					
+						<span class="property-value" aria-labelledby="lastName-label"><g:fieldValue bean="${participantsInstance}" field="lastName"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${participantsInstance?.combatStatus}">
 				<li class="fieldcontain">
 					<span id="combatStatus-label" class="property-label"><g:message code="participants.combatStatus.label" default="Combat Status" /></span>
@@ -46,15 +64,6 @@
 					<span id="formCategory-label" class="property-label"><g:message code="participants.formCategory.label" default="Form Category" /></span>
 					
 						<span class="property-value" aria-labelledby="formCategory-label"><g:link controller="formCategory" action="show" id="${participantsInstance?.formCategory?.id}">${participantsInstance?.formCategory?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${participantsInstance?.combatCategory}">
-				<li class="fieldcontain">
-					<span id="combatCategory-label" class="property-label"><g:message code="participants.combatCategory.label" default="Combat Category" /></span>
-					
-						<span class="property-value" aria-labelledby="combatCategory-label"><g:link controller="combatCategory" action="show" id="${participantsInstance?.combatCategory?.id}">${participantsInstance?.combatCategory?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -95,11 +104,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${participantsInstance?.student}">
+				<g:if test="${participantsInstance?.school}">
 				<li class="fieldcontain">
-					<span id="student-label" class="property-label"><g:message code="participants.student.label" default="Student" /></span>
+					<span id="school-label" class="property-label"><g:message code="participants.school.label" default="School" /></span>
 					
-						<span class="property-value" aria-labelledby="student-label"><g:link controller="students" action="show" id="${participantsInstance?.student?.id}">${participantsInstance?.student?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="school-label"><g:link controller="schools" action="show" id="${participantsInstance?.school?.id}">${participantsInstance?.school?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

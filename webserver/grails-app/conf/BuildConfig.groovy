@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
-        runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+//        runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
     }
 
     plugins {
@@ -68,6 +68,8 @@ grails.project.dependency.resolution = {
 		
 		compile ':spring-security-core:2.0-RC4'
 		compile ":email-confirmation:2.0.8"
+		
+		//compile 'org.apache.httpcomponents:httpclient:4.3.5'
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
