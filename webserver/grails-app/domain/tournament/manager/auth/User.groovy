@@ -42,6 +42,7 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
+		table 'tm_users'
 	}
 
 	Set<Role> getAuthorities() {

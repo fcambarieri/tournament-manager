@@ -2,14 +2,16 @@ package tournament.manager
 
 enum Sex {
 	
-	MALE("male"),
-	FEMALE("female"),
-	BOTH("both")
+	MALE("male", "M"),
+	FEMALE("female","F"),
+	BOTH("both","U")
 	
 	String name
+	String trimName
 	
-	private Sex(String n) {
+	private Sex(String n, String m) {
 		this.name = n
+		this.trimName = m
 	}
 	
 	public String toString() {
@@ -26,5 +28,9 @@ enum Sex {
 			}
 		}
 		return null
+	}
+	
+	public String toTrimName(Sex sex) {
+		return sex.trimName
 	}
 }

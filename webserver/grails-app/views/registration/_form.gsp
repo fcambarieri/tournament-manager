@@ -58,7 +58,7 @@
 		</div>
 		<div class="footer">
 
-			<g:submitButton name="continue" class="btn bg-olive btn-block"
+			<g:submitButton name="continue" class="btn btn-primary btn-block"
 				value="${message(code: 'default.button.continue.label', default: 'Continue')}" />
 
 			<g:link controller="login" action="auth" class="text-center"

@@ -6,10 +6,12 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="${request.getSession().getServletContext().getContextPath()}/img/avatar3.png" class="img-circle" alt="User Image" />
+<%--                            <img src="${request.getSession().getServletContext().getContextPath()}/img/avatar3.png" class="img-circle" alt="User Image" />--%>
+ 							<mat:imgAvatar class="img-circle"/>
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, <sec:username/></p>
+<%--                            <p>Hello, <sec:username/></p>--%>
+							<p><mat:welcome/></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>

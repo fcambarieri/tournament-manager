@@ -1,10 +1,54 @@
 package tournament.manager
 
+import tournament.manager.utils.GravatarUtil;
+import tournament.manager.utils.MD5Util;
+
 class TMTagLib {
 	
 //    static defaultEncodeAs = 'html'
-	
+	def springSecurityService 
 	static namespace = "mat"
+	
+	def getCurrentUser() {
+		return springSecurityService.currentUser
+	}
+	
+	def welcome = { attrs ->
+		if (springSecurityService.isLoggedIn()) {
+			String msg =  message(code: 'default.welcome.label', args: [currentUser.username])
+			out << msg
+		}
+	}
+	
+	def imgAvatar = { attrs ->
+		if (springSecurityService.isLoggedIn()) {
+			def currentUser = getCurrentUser()
+			def email = currentUser.email
+			if (email != null) {
+				def size = attrs.size != null ? attrs : ""
+				def src = GravatarUtil.gravatarImage(email)
+				def tag = "<img src='${src}${size}' class='${attrs.class}'/>"
+				out << tag.toString()
+			}
+		}
+	}
+	
+	def scriptAvatar = { attrs ->
+		//<script src="https://www.gravatar.com/205e460b479e2e5b48aec07710c08d50.json?callback=changeTitle" type="text/javascript"></script>
+		if (attrs.callback == null) {
+			throw new NullPointerException("Callback method is null")
+		}
+		if (springSecurityService.isLoggedIn()) {
+			def currentUser = getCurrentUser()
+			def email = currentUser.email
+			if (email != null) {
+				def callback = attrs.callback
+				def src = GravatarUtil.gravatarImage(email)
+				def tag = "<script type=\"text/javascript\" src='${src}.json?callback=$callback?'></script>"
+				out << tag.toString()
+			}
+		}
+	}
 	
 	/*def modal = { attrs ->
 		def model = [

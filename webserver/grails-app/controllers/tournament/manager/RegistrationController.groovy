@@ -3,6 +3,7 @@ package tournament.manager
 import com.grailsrocks.emailconfirmation.EmailConfirmationService;
 
 import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.annotation.Secured;
 import tournament.manager.auth.Role;
 import tournament.manager.auth.User
 import tournament.manager.auth.UserRole;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 
+@Secured("permitAll")
 class RegistrationController {
 
 	EmailConfirmationService emailConfirmationService

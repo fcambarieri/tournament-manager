@@ -1,29 +1,20 @@
+<link type="text/css" href="${resource(dir: 'css', file: 'jquery.treetable.css')}" />
+<script src="${resource(dir: 'js', file: 'jquery.treetable.js')}"></script>
+
 <script type="text/javascript">
 	var url = "${reloadUri}";
 	$(document).ready(function() {
          $('#tournament').on('change', function() {
-             //alert( this.value ); // or $(this).val()
-             
-             var goTo="?tournamentId="+$(this).val();
-             
-             window.location.href = goTo;
-<%--			var id = $(this).val();--%>
-<%--			if (id != "null") {--%>
-<%--				reloadSettings(id);--%>
-<%--			}--%>
-			
+             var id = $(this).val();
+             if (id != "null") {
+            	 var goTo="?tournamentId="+$(this).val();
+                 window.location.href = goTo;	
+             }
+ 
          });
 
-<%--         $('#combatCategory').on('change', function() {--%>
-<%--             //alert( this.value ); // or $(this).val()--%>
-             goTo=url+"?combatCategoryId="+$(this).val()+"&tournamentId="+$("#tournament").val();
-             window.location.href = goTo;
-<%--			--%>
-<%--			var id = $(this).val();--%>
-<%--			if (id != "null") {--%>
-<%--				reloadCombatWeight(id);--%>
-<%--			}--%>
-<%--         });--%>
+         $("#participants").treetable();
+         $("#poomseParticipants").treetable();
 	});
 
 	function reloadSettings(tournamentId) {
@@ -95,4 +86,7 @@
 	        }
 	    });
 	}
+
+	
+	
 </script>

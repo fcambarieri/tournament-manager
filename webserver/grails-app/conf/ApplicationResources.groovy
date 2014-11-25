@@ -38,4 +38,9 @@ modules = {
 		resource url: "js/plugins/tree/jquery.treegrid.js"
 		resource url: "js/plugins/tree/jquery.treegrid.bootstrap3.js"
 	}
+	
+	jqueryTree {
+		resource url: "css/tree/jquery.treetable.css"
+		resource url: "js/plugins/tree/jquery.treetable.js"
+	}
 }

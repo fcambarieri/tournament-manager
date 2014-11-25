@@ -79,7 +79,8 @@ abstract class AbstractController {
 		map.action = "create"
 		map.templateName="/${getControllerName()}/list"
 		map.buttonNameTemplate = "/home/forms/listButtons"
-		formView(map, params)
+		//formView(map, params)
+		render (view:"/home/forms/blank", model:map)
 	}
 	
 	def abstract getDomainInstance(params)

@@ -27,6 +27,7 @@ class ParticipantsController extends AbstractController{
 			model.tournamentSelected = model.tournaments.find {it.id == tournamentId}
 			model.belts = tournamentService.listBeltByTournaments(tournamentId)
 			model.combatCategories = tournamentService.listCombatCategoryByTournament(tournamentId)
+			model.formCategories = FormCategory.where{tournament.id==tournamentId}
 		}
 		if (params.combatCategoryId) {
 			Long combatCategoryId = new Long(params.combatCategoryId)

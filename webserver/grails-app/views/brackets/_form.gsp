@@ -56,6 +56,15 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: bracketsInstance, field: 'url', 'error')} ">
+	<label for="url">
+		<g:message code="brackets.url.label" default="Url" />
+		
+	</label>
+	<g:textField name="url" value="${bracketsInstance?.url}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: bracketsInstance, field: 'tournament', 'error')} required">
 	<label for="tournament">
 		<g:message code="brackets.tournament.label" default="Tournament" />

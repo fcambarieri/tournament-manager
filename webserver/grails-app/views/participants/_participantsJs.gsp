@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
 	var url = "${reloadUri}";
 	$(document).ready(function() {
@@ -97,4 +98,7 @@
 	        }
 	    });
 	}
+
+
+	
 </script>

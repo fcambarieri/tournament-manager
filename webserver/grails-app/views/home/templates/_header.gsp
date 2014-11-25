@@ -1,5 +1,6 @@
         <!-- header logo: style can be found in header.less -->
-        <header class="header">
+        <%@page import="tournament.manager.utils.GravatarUtil"%>
+<header class="header">
         	<g:link controller="logout" class="logo"> Tournament Manager</g:link>
 <%--            <a href="../../index.html" class="logo">--%>
 <%--                <!-- Add the class icon to your logo image or logo icon to add the margining -->--%>
@@ -214,7 +215,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="../../img/avatar3.png" class="img-circle" alt="User Image" />
+									 <mat:imgAvatar class="img-circle"/>
                                     <p>
                                         <sec:username/>
 <%--                                        <small>Member since Nov. 2012</small>--%>

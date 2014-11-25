@@ -26,7 +26,7 @@
             <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>
+                    <h1>${title}
                         <small>
                         	
                         </small>
@@ -43,7 +43,7 @@
 <%--                	<div class="row">--%>
  							<div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">${title}</h3>
+                                    <h3 class="box-title"></h3>
 <%--                                    <div class="box-tools pull-right">--%>
 <%--                                        <div class="label bg-aqua">Label</div>--%>
 <%--                                    </div>--%>

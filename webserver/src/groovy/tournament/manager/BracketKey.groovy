@@ -4,6 +4,7 @@ class BracketKey {
 
 	def belt
 	def competition
+	def bracket
 
 	public int hashCode() {
 		final int prime = 31;
@@ -16,8 +17,6 @@ class BracketKey {
 
 
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())

@@ -22,30 +22,78 @@ class BracketsController extends AbstractController {
 			tournaments:tournaments,
 			poomseParticipants:[:],
 			combatParticipants:[:],
+			title:message(code: 'default.entity.brackets', default: 'Brackets'),
 			scriptName:"/brackets/bracketJs"
 		]
 		
-		if (params.tournamentId) {
+		if (params.tournamentId != null && params.tournamentId != "null") {
 			Long tournamentId = new Long (params.tournamentId)
-		
+			model.tournamentSelected = Tournament.get(tournamentId)
 			def brackets = bracketService.potencialBracket(tournamentId)
 			model.putAll(brackets)
-//			def combatParticipants = Participants.createCriteria().list {
-//				eq("tournament.id",tournamentId)
-//			}
-//			
-//			def poomseParticipants = Participants.createCriteria().list {
-//				eq("tournament.id",tournamentId)
-//			}
-			
-//			model.poomseParticipants = poomseParticipants
-//			model.combatParticipants = combatParticipants
+			model.countParticipant = bracketService.countParticipant(tournamentId)
 		}
 		
-		//listFormView([tournaments:tournaments,poomseParticipants:poomseParticipants, combatParticipants:combatParticipants], params)
+		if ("${params.sort}" == "count") {
+			model.combatParticipants = model.combatParticipants.sort{ a, b -> 
+				if ("${params.order}" == "asc") {
+					a.value.size() <=> b.value.size()
+				} else {
+					b.value.size() <=> a.value.size()
+				}
+			}
+			
+			
+			model.poomseParticipants = model.poomseParticipants.sort{ a, b ->
+				
+				if ("${params.order}" == "asc") {
+					return a.value.size() <=> b.value.size()
+				}  else {
+					return b.value.size() <=> a.value.size()
+				}
+				
+			}
+		}
+		
+		
+		model.combatParticipantsCount = model.combatParticipants.size() 
+		model.poomseParticipantsCount = model.poomseParticipants.size() 
+		
 		blankView(model, "/brackets/settings", params)
 	}
 	
+	def createBracket() {
+		Long beltId = new Long(params.beltId)
+		String type = params.type
+		Long categoryId = new Long(params.categoryId)
+		Brackets bracket 
+		Belt belt = Belt.get(beltId)
+		if (belt == null) {
+			flash.errorMessage = message(code: 'default.not.found.message', args: [message(code: 'beltInstance.label', default: 'Belt'), beltId])
+			redirect action: "potencialBrackets", method: "GET"
+			return
+		}
+		if (type == "combat") {
+			CombatWeight category = CombatWeight.get(categoryId)
+			if (category == null) {
+				flash.errorMessage = message(code: 'default.not.found.message', args: [message(code: 'combatWeightInstance.label', default: 'CombatWeight'), categoryId])
+				redirect action: "potencialBrackets", method: "GET"
+				return
+			} 
+			bracket = bracketService.createCombatBracket( belt, category)
+		} else if (type == "poomse"){
+			FormCategory category = FormCategory.get(categoryId)
+			if (category == null) {
+				flash.errorMessage = message(code: 'default.not.found.message', args: [message(code: 'formCategoryInstance.label', default: 'Poomse Category'), categoryId])
+				redirect action: "potencialBrackets", method: "GET"
+				return
+			}
+			bracket = bracketService.createPoomseBracket(belt, category)
+		}
+		
+		flash.message = message(code: 'default.created.message', args: [message(code: 'bracketsInstance.label', default: 'Brackets'), bracket.id])
+		redirect action: "potencialBrackets", method: "GET"
+	}
 	
 	
     def index(Integer max) {

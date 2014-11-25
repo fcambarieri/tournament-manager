@@ -16,14 +16,14 @@ class TournamentController {
     def index() { 
 		int max = params.max ? Integer.parseInt(params.max) : 10
 		params.max = Math.min(max ?: 10, 100)
-		params.user = getCurrentUser()
+		params.owner = getCurrentUser()
 		def tournaments = tournamentService.listTournamentByUser(params)
 		render (view:"index", model:[tournaments: tournaments, total: tournaments.size()])
 	}
 	
 	def list(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		params.user = getCurrentUser()
+		params.owner = getCurrentUser()
 		def tournaments = tournamentService.listTournamentByUser(params)
 		render (view:"index", model:[tournaments: tournaments, total: tournaments.size()])
 	}

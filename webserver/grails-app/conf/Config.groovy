@@ -89,10 +89,10 @@ grails {
 		// filteringCodecForContentType.'text/html' = 'html'
 	}
 	mail {
-		host = "smtp.gmail.com"
-		port = 465
-		username = "fcambarieri@gmail.com"
-		password = "AndreaBeatriz"
+		host = "smtp.sendgrid.net"
+		port = 587
+		username = "fcambarieri"
+		password = "Franco060713"
 		props = ["mail.smtp.auth": "true",
 			"mail.smtp.socketFactory.port": "465",
 			"mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
@@ -182,8 +182,8 @@ grails.plugin.springsecurity.authority.className = 'tournament.manager.auth.Role
 
 
 //grails.plugins.springsecurity.failureHandler.defaultFailureUrl = "${grails.serverURL}/${appName}/login/auth"
-grails.plugin.springsecurity.authenticationFailureUrl="${grails.serverURL}/${appName}"
-grails.plugin.springsecurity.successHandler.defaultTargetUrl="${grails.serverURL}/${appName}/tournament/list"
+grails.plugin.springsecurity.authenticationFailureUrl="${grails.serverURL}/"
+grails.plugin.springsecurity.successHandler.defaultTargetUrl="${grails.serverURL}/tournament/list"
 grails.plugin.springsecurity.useSessionFixationPrevention = true
 //grails.plugin.springsecurity.useSecurityEventListener = true
 //grails.plugin.springsecurity.onAbstractAuthenticationFailureEvent = { e, appCtx ->

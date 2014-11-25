@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html class="bg-black">
+<html>
 <head>
-<meta name="layout" content="main" />
+<meta name="layout" content="main"/>
 <title>Tournament Manager</title>
 </head>
-<body class="bg-black">
+ <body class="skin-blue">
 
+	<g:render template="/home/templates/nav"/>
 	
 	<g:render template="/registration/form" />
 	

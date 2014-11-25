@@ -16,42 +16,9 @@
         <!-- header logo: style can be found in header.less -->
 
         <g:render template="/home/templates/nav"/>
-<%--			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">--%>
-<%--		        <div class="container">--%>
-<%--		            <div class="navbar-header page-scroll">--%>
-<%--		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">--%>
-<%--		                    <span class="sr-only">Toggle navigation</span>--%>
-<%--		                    <span class="icon-bar"></span>--%>
-<%--		                    <span class="icon-bar"></span>--%>
-<%--		                    <span class="icon-bar"></span>--%>
-<%--		                </button>--%>
-<%--		            </div>--%>
-<%--	            </div>--%>
-<%--	            <!-- Collect the nav links, forms, and other content for toggling -->--%>
-<%--            <div class="collapse navbar-collapse navbar-ex1-collapse">--%>
-<%--                <ul class="nav navbar-nav">--%>
-<%--                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->--%>
-<%--                    <li class="hidden">--%>
-<%--                        <a class="page-scroll" href="#page-top"></a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a class="page-scroll" href="#about">Home</a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a class="page-scroll" href="#services">Services</a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a class="page-scroll" href="#contact">Contact</a>--%>
-<%--                    </li>--%>
-<%----%>
-<%--                        <li><g:link controller="registration" action="index">${message(code: 'default.link.signup.label', default: 'Sign up')}</g:link></li>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--            <!-- /.navbar-collapse -->--%>
-<%--            </nav>--%>
         
        	  <div class="form-box" id="login-box">
-            <div class="header">Sign In</div>
+            <div class="header"><g:message code="default.login.signin" default="Sign In"/></div>
              <!-- <g:message code="springSecurity.login.header"/> -->
             <g:if test='${flash.message}'>
                 <div class="alert alert-danger alert-dismissable">
@@ -67,21 +34,20 @@
                         <input type="password" name="j_password" class="form-control" placeholder="Password"/>
                     </div>          
                     <div class="form-group">
-                        <input type="checkbox" name="_spring_security_remember_me"/> Remember me
+                        <input type="checkbox" name="_spring_security_remember_me"/><g:message code="default.login.rememberme" default="Remember me"/> 
                     </div>
                 </div>
                 <div class="footer">                                                               
-                    <button type="submit" class="btn bg-blue btn-block">Sign me in</button>  
+                    <button type="submit" class="btn bg-blue btn-block"><g:message code="default.login.signmein" default="Sign me in"/></button>  
                     
-                    <p><a href="#">I forgot my password</a></p>
+                    <p><a href="#"><g:message code="default.login.forgotpass" default="I forgot my password"/></a></p>
                     
                     <g:link controller="registration" action="index" class="text-center">${message(code: 'default.link.signup.label', default: 'Sign up')}</g:link>
-<%--                    <a href="register.html" class="text-center">Register a new membership</a>--%>
                 </div>
             </form>
 
             <div class="margin text-center">
-                <span>Sign in using social networks</span>
+                <span><g:message code="default.login.signinscocial" default="Sign in using social networks"/></span>
                 <br/>
                 <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
                 <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
